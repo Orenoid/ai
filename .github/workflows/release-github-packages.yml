@@ -1,0 +1,45 @@
+name: Release to GitHub Packages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: 'release-github-packages'
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Release to GitHub Packages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.11.0
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@orenoid'
+
+      - name: Install Dependencies
+        run: pnpm i
+
+      - name: Build Package
+        run: pnpm --filter @orenoid/ai build
+
+      - name: Publish to GitHub Packages
+        run: pnpm --filter @orenoid/ai publish --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

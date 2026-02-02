@@ -1,5 +1,5 @@
 {
-  "name": "ai",
+  "name": "@orenoid/ai",
   "version": "6.0.67",
   "description": "AI SDK by Vercel - The AI Toolkit for TypeScript and JavaScript",
   "license": "Apache-2.0",
@@ -86,12 +86,13 @@
     "node": ">=18"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://npm.pkg.github.com"
   },
   "homepage": "https://ai-sdk.dev/docs",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vercel/ai.git"
+    "url": "git+https://github.com/Orenoid/ai.git"
   },
   "bugs": {
     "url": "https://github.com/vercel/ai/issues"
