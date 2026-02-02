@@ -36,6 +36,9 @@ jobs:
       - name: Install Dependencies
         run: pnpm i
 
+      - name: Build Dependencies
+        run: pnpm --filter @ai-sdk/provider --filter @ai-sdk/provider-utils --filter @ai-sdk/gateway build
+
       - name: Build Package
         run: pnpm --filter @orenoid/ai build
 
